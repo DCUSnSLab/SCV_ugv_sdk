@@ -48,6 +48,11 @@ void TracerRobot::SetLightCommand(AgxLightMode f_mode, uint8_t f_value) {
   scout->SetLightCommand(f_mode, f_value);
 }
 
+void TracerRobot::DisableLightControl() {
+  auto tracer = dynamic_cast<TracerInterface*>(robot_);
+  tracer->DisableLightControl();
+}
+
 TracerCoreState TracerRobot::GetRobotState() {
   auto Tracer = dynamic_cast<TracerInterface*>(robot_);
   return Tracer->GetRobotState();

@@ -10,6 +10,14 @@
 #include "ugv_sdk/details/robot_base/ranger_base.hpp"
 
 namespace westonrobot {
+  RangerRobot::RangerRobot(bool is_mini_v1) {
+    if (is_mini_v1) {
+      robot_ = new RangerMiniV1Base();
+    } else {
+      robot_ = new RangerBase();
+    }
+  }
+
   RangerRobot::RangerRobot(Variant variant) {
     if (variant == Variant::kRangerMiniV1) {
       robot_ = new RangerMiniV1Base();
