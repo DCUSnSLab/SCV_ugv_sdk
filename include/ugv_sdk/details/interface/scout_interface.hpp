@@ -40,7 +40,6 @@ struct ScoutCommonSensorState {
   SdkTimePoint time_stamp;
 
   BmsBasicMessage bms_basic_state;
-  BmsExtendedMessage bms_extended_state;
 };
 
 struct ScoutInterface {

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5.1)
-project(ugv_sdk VERSION 0.8.0)
+project(ugv_sdk VERSION 0.10.0)
 
 find_program(CCACHE_PROGRAM ccache)
 if(CCACHE_PROGRAM)
@@ -10,8 +10,7 @@ endif()
 ## Project Options
 option(BUILD_TESTING "Build tests" OFF)
 option(STATIC_CHECK "Run static check" OFF)
-# set(CMAKE_BUILD_TYPE Release)
-# set(CMAKE_BUILD_TYPE Debug)
+option(PYTHON_BINDING "Build python binding" OFF)
 
 ## Check if pkg is built with ROS catkin
 if(CATKIN_DEVEL_PREFIX)
@@ -100,7 +99,6 @@ add_library(${PROJECT_NAME}
     src/mobile_robot/hunter_robot.cpp
     src/mobile_robot/bunker_robot.cpp
     src/mobile_robot/ranger_robot.cpp
-    src/mobile_robot/tracer_robot.cpp
     src/mobile_robot/titan_robot.cpp
     ########################
     ## protocol v2 support
@@ -112,6 +110,7 @@ add_library(${PROJECT_NAME}
 )
 target_link_libraries(${PROJECT_NAME} PUBLIC Threads::Threads)
 target_compile_definitions(${PROJECT_NAME} PUBLIC ASIO_ENABLE_OLD_SERVICES)
+target_compile_options(${PROJECT_NAME} PRIVATE -fPIC)
 target_include_directories(${PROJECT_NAME} PUBLIC
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
@@ -120,6 +119,12 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 # Build demo
 if(BUILD_WITHOUT_ROS)
     add_subdirectory(sample)
+endif()
+
+# Build python binding
+if(PYTHON_BINDING)
+    message(STATUS "Build python binding")
+    add_subdirectory(python)
 endif()
 
 # Build tests

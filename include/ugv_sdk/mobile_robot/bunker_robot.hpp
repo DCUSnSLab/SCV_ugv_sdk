@@ -18,14 +18,19 @@
 namespace westonrobot {
 class BunkerRobot : public RobotCommonInterface, public BunkerInterface {
  public:
-  BunkerRobot(ProtocolVersion protocol = ProtocolVersion::AGX_V2);
+  enum class Variant {
+    kBunkerV1 = 0,
+    kBunkerV2,
+    kBunkerPro,
+    kBunkerMini,
+  };
+  BunkerRobot(Variant variant);
   ~BunkerRobot();
 
   bool Connect(std::string can_name) override;
 
-  std::string RequestVersion(int timeout_sec = 3) override;
-
   void EnableCommandedMode() override;
+  std::string RequestVersion(int timeout_sec = 3) override;
 
   void SetMotionCommand(double linear_vel, double angular_vel) override;
 

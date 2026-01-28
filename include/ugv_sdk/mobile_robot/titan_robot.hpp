@@ -46,5 +46,4 @@ class TitanRobot : public RobotCommonInterface, public TitanInterface {
 };
 }  // namespace westonrobot
 
-
 #endif /* TITAN_ROBOT_HPP */

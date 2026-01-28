@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
   }
 
   std::unique_ptr<TracerRobot> tracer;
-  tracer = std::unique_ptr<TracerRobot>(new TracerRobot(ProtocolVersion::AGX_V2));
+  tracer = std::unique_ptr<TracerRobot>(new TracerRobot());
   if (tracer == nullptr)
     std::cout << "Failed to create robot object" << std::endl;
 
