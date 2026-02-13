@@ -25,7 +25,8 @@ if(CATKIN_DEVEL_PREFIX)
     )
 else()
     message(STATUS "Build package with cmake")
-    set(BUILD_WITHOUT_ROS ON)    
+    set(BUILD_WITHOUT_ROS ON)
+    mark_as_advanced(CATKIN_INSTALL_INTO_PREFIX_ROOT)
 endif()
 
 ## Generate symbols for IDE indexer
